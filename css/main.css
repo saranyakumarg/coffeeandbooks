@@ -1,0 +1,264 @@
+/* General Styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+   font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f4f8;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;  /* Ensure the body takes up full height */
+}
+header {
+    background-color: #6f4f1f;
+    color: #fff;
+    padding: 50px;
+    display: flex;             /* Enables flexbox */
+    justify-content: center;   /* Centers horizontally */
+    align-items: center;       /* Centers vertically */
+    height: 100px;             /* Sets a fixed height for the header */
+}
+header h1 {
+    font-size: 2.5em;
+    margin: 0;                /* Removes default margin */
+}
+nav {
+    background-color: #333;
+    padding: 10px;
+}
+nav a {
+    color: white;
+    margin: 0 20px;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+nav a:hover {
+    text-decoration: underline;
+}
+main {
+    flex: 1; /* Ensures the main section takes up available space */
+    padding: 30px;
+    background-color: white;
+}
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+/* Section Styles */
+.section {
+    padding: 50px 20px;
+    margin: 40px 0;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.section-title {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.section-description {
+    font-size: 1.1em;
+    color: #7f8c8d;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-button .btn {
+    background-color: #e67e22;
+    color: #fff;
+    padding: 12px 30px;
+    text-decoration: none;
+    font-size: 1.1em;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+.cta-button .btn:hover {
+    background-color: #d35400;
+}
+
+/* Add some spacing between sections */
+section + section {
+    margin-top: 50px;
+}
+
+
+.content-wrapper {
+    flex-grow: 1;  /* Ensures the content area takes up available space */
+    overflow-y: auto;  /* Allow content to scroll */
+    padding: 20px;
+    margin-bottom: 60px; /* Add margin at the bottom to prevent content overlap with the footer */
+}
+
+/* Menu List Styles */
+.menu-list {
+    list-style-type: none;
+    padding-left: 10%;
+    margin: 0;
+    width: 80%;  /* Make the menu list smaller */
+    max-width: 600px;  /* Set a maximum width for the list */
+    text-align: center; /* Center the content */
+}
+
+.menu-item {
+    background-color: #fff;
+    margin: 15px 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item-name {
+    font-size: 1.2em;
+    color: #2d2d2d;
+}
+
+.item-price {
+    font-size: 1.2em;
+    color: #e67e22;
+}
+
+.item-description {
+    font-size: 0.9em;
+    color: #7f8c8d;
+    margin-top: 10px;
+}
+
+/* Hover Effect for List Items */
+.menu-item:hover .item-name {
+    color: #e67e22;
+}
+
+.menu-item:hover .item-description {
+    color: #95a5a6;
+}
+
+/* Book list container */
+.book-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid layout */
+    gap: 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Book item styling */
+.book-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e0e0e0;
+}
+
+.book-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Item header */
+.book-item-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.book-item-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #34495e;
+    margin-bottom: 5px;
+}
+
+.book-item-author {
+    font-size: 1.1em;
+    color: #7f8c8d;
+}
+
+/* Item description */
+.book-item-description {
+    font-size: 1em;
+    color: #7f8c8d;
+    line-height: 1.6;
+    text-align: justify;
+    margin-top: 10px;
+}
+
+/* Media Queries for Small Screens */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+    nav a {
+        font-size: 1em;
+        margin: 0 10px;
+    }
+    .content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu-item {
+        padding: 10px;
+        margin: 10px 0;
+    }
+
+    .item-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .item-name, .item-price {
+        font-size: 1em;
+    }
+
+    .item-description {
+        font-size: 0.8em;
+    }
+}
