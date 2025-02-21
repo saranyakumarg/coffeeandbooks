@@ -32,6 +32,9 @@ header h1 {
 nav {
     background-color: #333;
     padding: 10px;
+    display: flex;
+    justify-content: flex-start; /* Align items to the left */
+    align-items: center;  /* Center the items vertically */
 }
 nav a {
     color: white;
@@ -42,6 +45,21 @@ nav a {
 nav a:hover {
     text-decoration: underline;
 }
+.admin-login {
+    margin-left: auto;  /* Pushes this element to the far right */
+    background-color: #e67e22;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.admin-login:hover {
+    background-color: #d35400;
+}
+
+
 main {
     flex: 1; /* Ensures the main section takes up available space */
     padding: 30px;
@@ -113,7 +131,7 @@ section + section {
 
 .content-wrapper {
     flex-grow: 1;  /* Ensures the content area takes up available space */
-    overflow-y: auto;  /* Allow content to scroll */
+    /* overflow-y: auto;  Allow content to scroll */
     padding: 20px;
     margin-bottom: 60px; /* Add margin at the bottom to prevent content overlap with the footer */
 }
@@ -230,6 +248,98 @@ section + section {
     margin-top: 10px;
 }
 
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 9999; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Slightly darker background */
+    padding-top: 80px; /* Added more padding for vertical centering */
+    overflow-y: auto; /* Allows scrolling if modal content is taller than the screen */
+    transition: opacity 0.3s ease; /* Smooth fade-in and fade-out transition */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 12px; /* Slightly rounded corners */
+    width: 90%;  /* Adjust width for better responsiveness */
+    max-width: 600px; /* Increased max width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Adding shadow for better depth */
+    transition: transform 0.3s ease; /* Smooth entrance animation */
+}
+
+.modal-content h2 {
+    font-size: 1.8em;  /* Increased font size for the title */
+    color: #333;  /* Darker text for better readability */
+    margin-bottom: 20px;
+}
+
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal-content input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    color: #333;
+}
+
+.modal-content button {
+    background-color: #e67e22;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content button:hover {
+    background-color: #d35400;
+}
+
+/* Close button style (X) */
+.close {
+    color: #aaa;
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover,
+.close:focus {
+    color: #000; /* Darker color for hover effect */
+    text-decoration: none;
+}
+
+/* Success message styling */
+.success-message {
+    color: green;
+    font-weight: bold;
+}
+
+/* Failure message styling */
+.failure-message {
+    color: red;
+    font-weight: bold;
+}
+
+
 /* Media Queries for Small Screens */
 @media (max-width: 768px) {
     header h1 {
@@ -260,5 +370,22 @@ section + section {
 
     .item-description {
         font-size: 0.8em;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .modal-content h2 {
+        font-size: 1.5em;
+    }
+
+    .modal-content input {
+        font-size: 1em;
+    }
+
+    .modal-content button {
+        font-size: 1em;
     }
 }

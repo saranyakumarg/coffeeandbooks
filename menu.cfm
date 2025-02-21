@@ -1,4 +1,4 @@
-<cfset menu = createObject("component", "controller.menu")>
+<cfset menu = createObject("component", "action.menu")>
 <cfset menuItems = menu.getAllMenuItems()>
 
 <!DOCTYPE html>
@@ -10,15 +10,15 @@
         <main>
             <h4>Explore our menu:</h4>
             <ul class="menu-list">
-                <cfloop array="#menuItems#" index="item">
+                <cfoutput query="#menuItems#" group="price">
                     <li class="menu-item">
                         <div class="item-header">
-                            <strong class="item-name">#item.name#</strong>
-                            <span class="item-price">$ #item.price#</span>
+                            <cfoutput><strong class="item-name">#menuItems.name#</strong></cfoutput>
+                            <span class="item-price">$ #menuItems.price#</span>
                         </div>
-                        <p class="item-description">#item.description#</p>
+                        <p class="item-description">#menuItems.description#</p>
                     </li>
-                </cfloop>
+                </cfoutput>
             </ul>
 
         </main> 

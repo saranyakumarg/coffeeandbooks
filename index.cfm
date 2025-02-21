@@ -3,7 +3,9 @@
 <cfinclude  template="layout/header.cfm">
 <body>
     <cfinclude  template="layout/nav.cfm">
-    <main>
+    <cfoutput>
+
+<!---     <main> --->
         <div class="content-wrapper">
             <div class="section">
                 <h2 class="section-title">Freshly Brewed Coffee</h2>
@@ -25,11 +27,12 @@
                 <h2 class="section-title">Special Events</h2>
                 <p class="section-description">Join us for book readings, coffee tasting events, and more. Stay tuned for upcoming events and be part of our vibrant community.</p>
                 <div class="cta-button">
-                    <a href="#events" class="btn">See Upcoming Events</a>
+                    <a href="##events" class="btn">See Upcoming Events</a>
                 </div>
             </div>
         </div>
-    </main> 
+            </cfoutput>
+<!---     </main>  --->
     <cfinclude  template="layout/footer.cfm">
 </body>
 </html>
