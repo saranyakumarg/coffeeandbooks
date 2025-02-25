@@ -47,7 +47,7 @@ nav a:hover {
 }
 .admin-login {
     margin-left: auto;  /* Pushes this element to the far right */
-    background-color: #e67e22;
+    background-color: #6f4f1f;
     color: white;
     padding: 8px 20px;
     border-radius: 5px;
@@ -56,7 +56,7 @@ nav a:hover {
 }
 
 .admin-login:hover {
-    background-color: #d35400;
+    background-color: #4f3003;
 }
 
 
@@ -339,6 +339,212 @@ section + section {
     font-weight: bold;
 }
 
+
+/* Admin Dashboard Styling */
+.dashboard-wrapper {
+    display: flex;
+    gap: 20px; /* Creates space between sidebar and content */
+    margin-top: 20px;
+}
+
+.toggle-sidebar-btn {
+    background-color: #e67e22;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+} 
+
+.toggle-sidebar-btn:hover {
+    background-color: #d35400;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 10px;
+
+
+}
+
+.sidebar-nav a {
+    color: #6f4f1f;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.sidebar-nav a:hover {
+    color: #4f3003; 
+}
+
+/* Dashboard Content Styling */
+.dashboard-content {
+    flex-grow: 1; /* Allows content to fill remaining space */
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    min-height: 400px; /* Ensures the content area is large enough */
+}
+
+/* Dashboard Header */
+.dashboard-content h2 {
+    font-size: 2.5em;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+/* Info Boxes */
+.dashboard-info {
+    display: flex;
+    gap: 20px;
+}
+
+.info-box {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    text-align: center;
+}
+
+.info-box h3 {
+    font-size: 1.5em;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.info-box p {
+    font-size: 2em;
+    color: #e67e22; /* Orange color for counts */
+    font-weight: bold;
+}
+
+
+/* admin side */
+
+.create-menu-btn {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.create-menu-btn button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #6f4f1f;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.create-menu-btn button:hover {
+    background-color: #4f3003;
+}
+
+.search-bar {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.search-bar input {
+    padding: 10px;
+    font-size: 16px;
+    width: 200px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.menu-items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.menu-items-table th,
+.menu-items-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.menu-items-table th {
+    background-color: #f8f9fa;
+}
+
+.menu-items-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.menu-items-table button {
+    padding: 5px 10px;
+    background-color: #6f4f1f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.menu-items-table button:hover {
+    background-color: #4f3003;
+}
+
+
+.create-menu-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-group input, .form-group textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.form-group button {
+    padding: 12px;
+    background-color: #6f4f1f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* Align the submit button to the right */
+.create-menu-form .form-group:last-child {
+    text-align: right;
+}
+
+.form-group button:hover {
+    background-color: #4f3003;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: #007bff;
+}
 
 /* Media Queries for Small Screens */
 @media (max-width: 768px) {

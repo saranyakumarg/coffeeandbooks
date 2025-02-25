@@ -2,12 +2,13 @@
     <header>
         <h1>#application.name#</h1>
     </header>
-
+    <!-- Inject application.baseURL into a data attribute (to access in js file)-->
+    <div id="appConfig" data-baseurl="#application.baseURL#"></div>
     <nav>
-        <a href="index.cfm">Home</a>
-        <a href="about.cfm">About</a>
-        <a href="menu.cfm">Menu</a>
-        <a href="book.cfm">Books</a>
+        <a href="#application.baseURL#?page=home">Home</a>
+        <a href="#application.baseURL#?page=about">About</a>
+        <a href="#application.baseURL#?page=menu">Menu</a>
+        <a href="#application.baseURL#?page=books">Books</a>
         <cfif structKeyExists(session, "loggedInUser")>
             <a href="##" id="adminLogoutBtn" class="admin-login" onclick="logout()">Logout</a>
             <!---#session.loggedInUser.role# --->
@@ -17,6 +18,6 @@
     </nav>
 
 <cfinclude  template="login.cfm">
-<script src="js/main.js"></script>
+<script src="#application.baseURL#js/main.js"></script>
 </cfoutput>
 

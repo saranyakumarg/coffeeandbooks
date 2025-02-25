@@ -1,5 +1,5 @@
-<cfset book = createObject("component", "action.book")>
-<cfset books = book.getAllbookItems()>
+<cfset variables.book = createObject("component", "#application.baseURL#model.book")>
+<cfset variables.qryBooks = book.getAllbookItems()>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,13 +11,13 @@
         <main>
             <h4>Explore Our Books:</h4>
             <ul class="book-list">
-                <cfloop query="#books#">
+                <cfloop query="#variables.qryBooks#">
                     <li class="book-item">
                         <div class="book-item-header">
-                            <strong class="book-item-name">#books.name#</strong>
-                            <span class="book-item-author">by #books.authorName#</span>
+                            <strong class="book-item-name">#variables.qryBooks.name#</strong>
+                            <span class="book-item-author">by #variables.qryBooks.authorName#</span>
                         </div>
-                        <p class="book-item-description">#books.description#</p>
+                        <p class="book-item-description">#variables.qryBooks.description#</p>
                     </li>
                 </cfloop>
             </ul>

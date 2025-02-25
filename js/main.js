@@ -1,4 +1,5 @@
-
+    // Access the data attribute from the HTML element
+    var baseURL = document.getElementById("appConfig").getAttribute("data-baseurl");    
     var modal = document.getElementById("adminLoginModal");
     var btn = document.getElementById("adminLoginBtn");
     var span = document.getElementsByClassName("close")[0];
@@ -26,14 +27,14 @@
         submitButton.innerHTML = "Submitting...";
 
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "action/login-action.cfm", true);
+        xhr.open("POST", baseURL + "controller/loginAction.cfm", true);
         xhr.onload = function() {
             submitButton.disabled = false;
             submitButton.innerHTML = "login";
             if(xhr.status == 200) {
                 span.innerHTML = "login successful";
                 span.classList.add("success-message");
-                window.location.href = "dashboard.cfm"; 
+                window.location.href = baseURL + "?page=dashboard"; 
             } else {
                 span.classList.add("failure-message");
                 span.innerHTML = "Invaild credentials";
@@ -47,10 +48,10 @@
 
     function logout() {    
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "action/login-action.cfm?logout=true", true);
+        xhr.open("GET", baseURL + "controller/loginAction.cfm?logout=true", true);
         xhr.onload = function() {
             if (xhr.status == 200) {
-                window.location.href = "index.cfm";
+                window.location.href = baseURL;
             } else {
                 span.classList.add("failure-message");
                alert('An error occurred during logout');

@@ -1,4 +1,4 @@
-<cfset menu = createObject("component", "action.menu")>
+<cfset menu = createObject("component", "#application.baseURL#model.menu")>
 <cfset menuItems = menu.getAllMenuItems()>
 
 <!DOCTYPE html>
