@@ -4,8 +4,10 @@
     var btn = document.getElementById("adminLoginBtn");
     var span = document.getElementsByClassName("close")[0];
 
-    btn.onclick = function() {
-        modal.style.display = "block";
+    if(btn){
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
     }
     span.onclick = function() {
         modal.style.display = "none";
@@ -62,5 +64,32 @@
         };
         xhr.send();
     }
+
+    function deleteMenuItem(itemId) {
+        if (confirm("Are you sure you want to delete this item?")) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", baseURL + "controller/admin/menuAction.cfm?action=delete", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            var data = "id=" + encodeURIComponent(itemId);
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    if (xhr.responseText.trim() === "success") {
+                        alert("Item deleted successfully.");
+                        window.location.href = baseURL + "?page=admin-menu&currentPage=1"; 
+                    } else if (xhr.responseText.trim() === "error") {
+                        alert("There was an error deleting the item.");
+                    } else {
+                        alert("Unexpected response: " + xhr.responseText);
+                    }
+                } else {
+                    alert("HTTP Error: " + xhr.status);
+                }
+            };
+            xhr.send(data);
+        }
+    }
+    
+
+
     
 

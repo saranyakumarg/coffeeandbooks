@@ -1,9 +1,7 @@
-<cfif NOT structKeyExists(session, "loggedInUser")>
-    <cflocation url="#application.baseURL#index.cfm">
-</cfif>
 
-<cfset menu = createObject("component", "#application.baseURL#model.admin.menu")>
-<cfset menuItems = menu.getAllMenuItems()>
+
+<cfinclude  template="../../controller/admin/menuAction.cfm">
+
 <!DOCTYPE html>
 <html lang="en">
 <cfinclude  template="../layout/header.cfm">
@@ -34,17 +32,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <cfoutput query="#menuItems#">
+                            <cfoutput query="#variables.menuItems.items#">
                                 <tr>
-                                    <td>#menuItems.id#</td>
-                                    <td>#menuItems.name#</td>
-                                    <td>#menuItems.description#</td>
-                                    <td>$#menuItems.price#</td>
+                                    <td>#variables.menuItems.items.id#</td>
+                                    <td>#variables.menuItems.items.name#</td>
+                                    <td>#variables.menuItems.items.description#</td>
+                                    <td>$#variables.menuItems.items.price#</td>
                                     <td>
-                                        <button class="edit-btn" title="Edit" onclick="window.location.href='#application.baseURL#?page=create-menu&id=#menuItems.id#'">
+                                        <button class="edit-btn" title="Edit" onclick="window.location.href='#application.baseURL#?page=create-menu&id=#variables.menuItems.items.id#'">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <button class="delete-btn" title="Delete" onclick="deleteItem()">
+                                        <button class="delete-btn" title="Delete" onclick="deleteMenuItem(#variables.menuItems.items.id#)">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </td>
@@ -52,6 +50,29 @@
                             </cfoutput>
                         </tbody>
                     </table>
+
+                    <div class="pagination">
+                        <cfif currentPage GT 1>
+                            <a href="#application.baseURL#?page=admin-menu&currentPage=#currentPage-1#" >Previous</a>
+                        <cfelse>
+                            <a href="javascript:void(0);" style="pointer-events: none; color: gray;">Previous</a>
+                        </cfif>
+
+                        <cfoutput>
+                            <!-- Display page numbers -->
+                            <cfloop from="1" to="#variables.totalPages#" index="pageNum">
+                                <a href="#application.baseURL#?page=admin-menu&currentPage=#pageNum#" 
+                                <cfif pageNum EQ currentPage>class="active"</cfif>>#pageNum#</a>
+                            </cfloop>
+                        </cfoutput>
+
+                        <cfif currentPage LT variables.totalPages>
+                            <a href="#application.baseURL#?page=admin-menu&currentPage=#currentPage+1#">Next</a>
+                        <cfelse>
+                            <a href="javascript:void(0);" style="pointer-events: none; color: gray;">Next</a>
+                        </cfif>
+                    </div>
+
                 </div>
             </div>
         </main>

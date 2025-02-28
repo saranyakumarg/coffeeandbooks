@@ -1,22 +1,39 @@
 
 <cfcomponent displayname="MenuComponent">
-
     <!--- get menu list --->
-    <cffunction name="getAllMenuItems" access="public" returntype="query">
+    <cffunction name="getAllMenuItems" access="public" returntype="struct">
         <cfargument name="id" type="numeric" required="false">
+        <cfargument name="page" type="numeric" required="true" default="1">
+        <cfargument name="pageSize" type="numeric" required="true" default="10">
+        <cfset var qryTotalCount = queryNew('')>
         <cfset var qryGetAllMenuItems = queryNew('')>
+        <cfset variable.result = {}>
+        <cfset var variable.page = IIf(arguments.page, arguments.page, 1)>
+
+        <cfset var offset = (arguments.page - 1) * arguments.pageSize>
+        <cfset var totalCount = 0>
+        <cfquery name="qryTotalCount" datasource="#application.dsn#">
+            SELECT COUNT(*) as total_count
+            FROM menu_items
+        </cfquery>
+        <cfset totalCount = qryTotalCount.total_count>
+        <cfset variable.result.totalCount = totalCount>
         <cfquery name="qryGetAllMenuItems" datasource="#application.dsn#">
             SELECT id, name, description, price
             FROM menu_items
             <cfif arguments.id GT 0>
                 WHERE id = <cfqueryparam value="#arguments.id#" cfsqltype="cf_sql_integer">
             </cfif>
+            ORDER BY id
+            LIMIT <cfqueryparam value="#arguments.pageSize#" cfsqltype="cf_sql_integer">
+            OFFSET <cfqueryparam value="#offset#" cfsqltype="cf_sql_integer">
         </cfquery>
-        <cfreturn qryGetAllMenuItems>
+        <cfset variable.result.items = qryGetAllMenuItems>
+        <cfreturn  variable.result>
     </cffunction>
 
 
-    <!--- create new menu item --->
+    <!--- create new/update menu item --->
     <cffunction name="createMenuItem" access="public" returntype="boolean">
         <cfargument name="id" type="numeric" required="false">
         <cfargument name="name" type="string" required="true">
@@ -59,5 +76,21 @@
 
         <cfreturn success>
     </cffunction>
+
+   <!--- delete menu item --->
+    <cffunction name="deleteMenuItem" access="public" returntype="boolean">
+        <cfargument name="itemId" type="numeric" required="true">
+        
+        <cfset var success = false>
+
+        <!--- Perform the delete operation --->
+        <cfquery name="qryDeleteItem" datasource="#application.dsn#">
+            DELETE FROM menu_items
+            WHERE id = <cfqueryparam value="#arguments.itemId#" cfsqltype="cf_sql_integer">
+        </cfquery>
+
+        <cfreturn success>
+    </cffunction>
+
     
 </cfcomponent>
