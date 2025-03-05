@@ -14,6 +14,12 @@
                 <cfloop query="#variables.qryBooks#">
                     <li class="book-item">
                         <div class="book-item-header">
+                            <div class="book-item-image">
+                                <!-- Check if image path exists -->
+                                <cfif len(variables.qryBooks) && len(variables.qryBooks.image_file_path)>
+                                    <img src="#application.baseUrl&variables.qryBooks.image_file_path#" alt="Cover of #variables.qryBooks.name#" />
+                                </cfif>
+                            </div>
                             <strong class="book-item-name">#variables.qryBooks.name#</strong>
                             <span class="book-item-author">by #variables.qryBooks.authorName#</span>
                         </div>
@@ -21,7 +27,7 @@
                     </li>
                 </cfloop>
             </ul>
-        </main> 
+        </main>
     </cfoutput>
 
     <cfinclude  template="layout/footer.cfm">

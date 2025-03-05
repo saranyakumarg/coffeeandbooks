@@ -14,6 +14,9 @@
                     <li class="menu-item">
                         <div class="item-header">
                             <cfoutput><strong class="item-name">#menuItems.name#</strong></cfoutput>
+                            <cfif len(menuItems) && len(menuItems.image_file_path)>
+                                <img src="#application.baseUrl&menuItems.image_file_path#" class="small-image-home">
+                            </cfif>
                             <span class="item-price">$ #menuItems.price#</span>
                         </div>
                         <p class="item-description">#menuItems.description#</p>

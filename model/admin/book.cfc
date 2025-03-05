@@ -1,12 +1,12 @@
 
 <cfcomponent displayname="MenuComponent">
-    <!--- get menu list --->
-    <cffunction name="getAllMenuItems" access="public" returntype="struct">
+    <!--- get book list --->
+    <cffunction name="getAllBooks" access="public" returntype="struct">
         <cfargument name="id" type="numeric" required="false">
         <cfargument name="page" type="numeric" required="true" default="1">
         <cfargument name="pageSize" type="numeric" required="true" default="10">
         <cfset var qryTotalCount = queryNew('')>
-        <cfset var qryGetAllMenuItems = queryNew('')>
+        <cfset var qryGetAllbooks = queryNew('')>
         <cfset variable.result = {}>
         <cfset var variable.page = IIf(arguments.page, arguments.page, 1)>
 
@@ -14,13 +14,13 @@
         <cfset var totalCount = 0>
         <cfquery name="qryTotalCount" datasource="#application.dsn#">
             SELECT COUNT(*) as total_count
-            FROM menu_items
+            FROM books
         </cfquery>
         <cfset totalCount = qryTotalCount.total_count>
         <cfset variable.result.totalCount = totalCount>
-        <cfquery name="qryGetAllMenuItems" datasource="#application.dsn#">
-            SELECT id, name, description, price, image_file_path
-            FROM menu_items
+        <cfquery name="qryGetAllbooks" datasource="#application.dsn#">
+            SELECT id, name, description, authorName, image_file_path
+            FROM books
             <cfif arguments.id GT 0>
                 WHERE id = <cfqueryparam value="#arguments.id#" cfsqltype="cf_sql_integer">
             </cfif>
@@ -28,17 +28,17 @@
             LIMIT <cfqueryparam value="#arguments.pageSize#" cfsqltype="cf_sql_integer">
             OFFSET <cfqueryparam value="#offset#" cfsqltype="cf_sql_integer">
         </cfquery>
-        <cfset variable.result.items = qryGetAllMenuItems>
+        <cfset variable.result.items = qryGetAllbooks>
         <cfreturn  variable.result>
     </cffunction>
 
 
-    <!--- create new/update menu item --->
-    <cffunction name="createMenuItem" access="public" returntype="boolean">
+    <!--- create new/update book --->
+    <cffunction name="createBook" access="public" returntype="boolean">
         <cfargument name="id" type="numeric" required="false">
         <cfargument name="name" type="string" required="true">
         <cfargument name="description" type="string" required="true">
-        <cfargument name="price" type="numeric" required="true">
+        <cfargument name="author" type="string" required="true">
         <cfargument name="imagePath" type="string" required="false">
 
         <cfset var success = false>
@@ -46,11 +46,11 @@
 
         <cfif structKeyExists(arguments, "id") AND arguments.id GT 0>
             <cfquery datasource="#application.dsn#">
-                UPDATE menu_items
+                UPDATE books
                 SET 
                     name = <cfqueryparam value="#arguments.name#" cfsqltype="cf_sql_varchar">,
                     description = <cfqueryparam value="#arguments.description#" cfsqltype="cf_sql_text">,
-                    price = <cfqueryparam value="#arguments.price#" cfsqltype="cf_sql_decimal">
+                    authorName = <cfqueryparam value="#arguments.author#" cfsqltype="cf_sql_varchar">
                     <cfif len(arguments.imagePath)>, image_file_path = <cfqueryparam value="#arguments.imagePath#" cfsqltype="cf_sql_text"></cfif>
                 WHERE id = <cfqueryparam value="#arguments.id#" cfsqltype="cf_sql_integer">
             </cfquery>
@@ -59,11 +59,11 @@
 
         <cfelse>
             <cfquery datasource="#application.dsn#">
-                INSERT INTO menu_items (name, description, price <cfif len(arguments.imagePath)>, image_file_path</cfif>)
+                INSERT INTO books (name, description, authorName <cfif len(arguments.imagePath)>, image_file_path</cfif>)
                 VALUES (
                     <cfqueryparam value="#arguments.name#" cfsqltype="cf_sql_varchar">,
                     <cfqueryparam value="#arguments.description#" cfsqltype="cf_sql_text">,
-                    <cfqueryparam value="#arguments.price#" cfsqltype="cf_sql_decimal">
+                    <cfqueryparam value="#arguments.author#" cfsqltype="cf_sql_varchar">
                     <cfif len(arguments.imagePath)>, <cfqueryparam value="#arguments.imagePath#" cfsqltype="cf_sql_text"></cfif>
                 )
             </cfquery>
@@ -80,16 +80,16 @@
         <cfreturn success>
     </cffunction>
 
-   <!--- delete menu item --->
+   <!--- delete book --->
     <cffunction name="deleteMenuItem" access="public" returntype="boolean">
-        <cfargument name="itemId" type="numeric" required="true">
+        <cfargument name="bookId" type="numeric" required="true">
         
         <cfset var success = false>
 
         <!--- Perform the delete operation --->
         <cfquery name="qryDeleteItem" datasource="#application.dsn#">
-            DELETE FROM menu_items
-            WHERE id = <cfqueryparam value="#arguments.itemId#" cfsqltype="cf_sql_integer">
+            DELETE FROM books
+            WHERE id = <cfqueryparam value="#arguments.bookId#" cfsqltype="cf_sql_integer">
         </cfquery>
 
         <cfreturn success>

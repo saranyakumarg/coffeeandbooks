@@ -24,4 +24,13 @@
     <cfcase value="create-menu">
         <cfinclude template="views/admin/createMenu.cfm">
     </cfcase>
+    <cfcase value="admin-books">
+        <cfinclude template="views/admin/book.cfm">
+    </cfcase>
+    <cfcase value="create-book">
+        <cfinclude template="views/admin/createBook.cfm">
+    </cfcase>
+    <cfcase value="files">
+        <cfinclude template="views/admin/files.cfm">
+    </cfcase>
 </cfswitch>

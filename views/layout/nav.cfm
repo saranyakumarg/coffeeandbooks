@@ -18,6 +18,5 @@
     </nav>
 
 <cfinclude  template="login.cfm">
-<script src="#application.baseURL#js/main.js"></script>
 </cfoutput>
 

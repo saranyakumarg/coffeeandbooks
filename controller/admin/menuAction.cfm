@@ -12,19 +12,28 @@
     <cfset variable.ename ="">
     <cfset variable.edescription = "">
     <cfset variable.eprice = 0>
+    <cfset variable.eimage_file_path = "">
     <cfif structKeyExists(URL, "id") AND Len(URL.id) GT 0>
         <cfset variable.singleMenuItem = menu.getAllMenuItems(url.id)>
         <cfset variable.itemID = url.id>
         <cfset variable.ename = variable.singleMenuItem.items.name>
         <cfset variable.edescription = variable.singleMenuItem.items.description>
         <cfset variable.eprice = variable.singleMenuItem.items.price>
+        <cfset variable.eimage_file_path = variable.singleMenuItem.items.image_file_path>
     </cfif>
 
     <cfif structKeyExists(form, "createMenuItem")>
+        <cfset variable.imagePath = "">
+        <cfif isDefined("Form.imageContent") AND len(Form.imageContent)>
+            <cfset variable.saveDir = expandPath("uploads/")>
+            <cffile action = "upload" fileField = "Form.imageContent" destination = "#variable.saveDir#" accept = "image/*" nameConflict = "MakeUnique">
+            <cfset variable.imageName = cffile.serverFile>
+            <cfset variable.imagePath = 'uploads/' & variable.imageName>
+        </cfif>
         <cfif len(variable.itemID) AND variable.itemID GT 0>
-            <cfset result = menu.createMenuItem(variable.itemID, form.name, form.description, form.price)>
+            <cfset result = menu.createMenuItem(variable.itemID, form.name, form.description, form.price, variable.imagePath)>
         <cfelse>
-            <cfset result = menu.createMenuItem(variable.itemID, form.name, form.description, form.price)>
+            <cfset result = menu.createMenuItem(variable.itemID, form.name, form.description, form.price, variable.imagePath)>
         </cfif>
         
         <cfif result>

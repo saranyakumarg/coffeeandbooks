@@ -1,4 +1,4 @@
-<cfinclude  template="../../controller/admin/menuAction.cfm">
+<cfinclude  template="../../controller/admin/booksAction.cfm">
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,39 +10,39 @@
             <div class="dashboard-wrapper">
                 <cfinclude  template="../layout/sidenav.cfm">
                 <div class="dashboard-content">
-                    <h3>Create New Menu Item</h3>
+                    <h3>Add New Book</h3>
                     #variable.message#
-                    <cfif len(variable.singleMenuItem) && len(variable.singleMenuItem.items.image_file_path)>
-                        <img src="#application.baseUrl&variable.singleMenuItem.items.image_file_path#" class="small-image">
+                    <cfif len(variable.singleBook) && len(variable.singleBook.items.image_file_path)>
+                        <img src="#application.baseUrl&variable.singleBook.items.image_file_path#" class="small-image">
                     </cfif>
 
-                    <cfform action="" method="POST" id="createMenuForm" name="createMenuForm" format="html" class="create-menu-form" enctype = "multipart/form-data">
+                    <cfform action="" method="POST" id="createBookForm" name="createBookForm" format="html" class="create-menu-form" enctype = "multipart/form-data">
                         <div class="form-group">
-                            <label for="name">Menu Item Name:</label>
+                            <label for="name">Book Name:</label>
                             <cfinput type="text" id="name" name="name" value="#variable.ename#" required placeholder="Enter menu item name">
                         </div>
 
                         <div class="form-group">
                             <label for="description">Description:</label>
                             <textarea id="description" name="description" required placeholder="Enter description of the menu item">
-                                <cfif len(variable.singleMenuItem)>
-                                    #variable.singleMenuItem.items.description#
+                                <cfif len(variable.singleBook)>
+                                    #variable.singleBook.items.description#
                                 </cfif>
                             </textarea>
                         </div>
 
                         <div class="form-group">
-                            <label for="price">Price ($):</label>
-                            <cfinput type="text" id="price" name="price" step="0.01" min="0" value="#variable.eprice#" required placeholder="Enter price" pattern="^\d+(\.\d{1,2})?$">
+                            <label for="price">Author:</label>
+                            <cfinput type="text" id="author" name="author" value="#variable.eauthor#" required placeholder="Enter author name">
                         </div>
 
                         <div class="form-group">
-                            <label for="image">Menu Item Image:</label>
+                            <label for="image">Book Image:</label>
                             <cfinput type="file" id="imageContent" name="imageContent" accept="image/*">
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" id="createMenuItem" name="createMenuItem"><cfif len(variable.singleMenuItem)>Update<cfelse>Add</cfif> Menu Item</button>
+                            <button type="submit" id="createBook" name="createBook"><cfif len(variable.singleBook)>Update<cfelse>Add</cfif> Book </button>
                         </div>
                     </cfform>
                 </div>

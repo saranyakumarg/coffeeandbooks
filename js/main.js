@@ -88,6 +88,35 @@
             xhr.send(data);
         }
     }
+
+    function deleteBook(bookId) {
+        if (confirm("Are you sure you want to delete this book?")) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", baseURL + "controller/admin/booksAction.cfm?action=delete", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            var data = "id=" + encodeURIComponent(bookId);
+            
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    try {
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.SUCCESS) {
+                            alert(response.MESSAGE);
+                            window.location.href = baseURL + "?page=admin-books&currentPage=1"; 
+                        } else {
+                            alert(response.MESSAGE);
+                        }
+                    } catch (e) {
+                        alert("Error parsing response: " + e.message);
+                    }
+                } else {
+                    alert("HTTP Error: " + xhr.status);
+                }
+            };
+            
+            xhr.send(data);
+        }
+    }
     
 
 

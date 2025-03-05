@@ -24,6 +24,12 @@ CREATE TABLE menu_items (
     created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+ALTER TABLE menu_items
+ADD COLUMN image_file_path VARCHAR(255);
+
+ALTER TABLE books
+ADD COLUMN image_file_path VARCHAR(255);
+
 INSERT INTO menu_items (name, description, price)
 VALUES
     ('Espresso', 'Strong black coffee', 3.00),

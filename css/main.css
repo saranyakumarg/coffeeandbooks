@@ -194,58 +194,78 @@ section + section {
 /* Book list container */
 .book-list {
     list-style: none;
-    padding: 0;
+    padding: 50px !important;
     margin: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive grid layout */
+    grid-template-columns: 1fr; /* 1 item per row on all screen sizes */
     gap: 20px;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* Book item styling */
+.book-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Ensures books are listed one by one downward */
+    gap: 15px;
+}
+
 .book-item {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid #e0e0e0;
 }
 
 .book-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    transform: scale(1.02);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Item header */
 .book-item-header {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    margin-bottom: 15px;
+    gap: 15px;
+    width: 100%;
+}
+
+.book-item-image img {
+    width: 80px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+}
+
+.book-item:hover .book-item-image img {
+    transform: scale(1.5) translateX(30px) perspective(500px); /* Scale up and give a slight upward shift */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); /* Stronger shadow for emphasis */
+    border-color: #ffffff; /* Change border color on hover */
 }
 
 .book-item-name {
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: bold;
-    color: #34495e;
-    margin-bottom: 5px;
+    color: #333;
 }
 
 .book-item-author {
-    font-size: 1.1em;
-    color: #7f8c8d;
+    font-size: 1em;
+    color: #777;
 }
 
-/* Item description */
 .book-item-description {
-    font-size: 1em;
-    color: #7f8c8d;
-    line-height: 1.6;
-    text-align: justify;
     margin-top: 10px;
+    font-size: 0.95em;
+    color: #555;
+    line-height: 1.5;
 }
 
 /* Modal styles */
@@ -570,6 +590,26 @@ section + section {
     background-color: #ddd;
 }
 
+.small-image {
+    width: 200px; height: auto;
+}
+
+.small-image-home {
+    width: 200px;
+    height: auto;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+    border: 2px solid transparent; /* Adds a border with a hover effect */
+}
+
+/* Hover effect */
+.small-image-home:hover {
+    transform: scale(1.5) translateY(-10px) perspective(500px); /* Scale up and give a slight upward shift */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); /* Stronger shadow for emphasis */
+    border-color: #ffffff; /* Change border color on hover */
+}
+
 
 /* Media Queries for Small Screens */
 @media (max-width: 768px) {
@@ -619,4 +659,21 @@ section + section {
     .modal-content button {
         font-size: 1em;
     }
+}
+/* Media query for larger screen sizes */
+@media (min-width: 768px) {
+    .book-list {
+        grid-template-columns: 1fr 1fr; /* 2 items per row on medium-sized screens */
+    }
+}
+
+@media (min-width: 1024px) {
+    .book-list {
+        grid-template-columns: 1fr 1fr 1fr; /* 3 items per row on larger screens */
+    }
+}
+
+/* For the first row, making sure only 1 item spans the full width */
+.book-list li:nth-child(1) {
+    grid-column: span 1;
 }
