@@ -4,7 +4,7 @@
 <div id="adminLoginModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <h2>Admin Login</h2>
+        <h2>Login</h2>
         <form id="adminLoginForm" onsubmit="loginFormSubmit(event)">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required><br>

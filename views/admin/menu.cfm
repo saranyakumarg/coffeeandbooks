@@ -14,7 +14,7 @@
                 <div class="dashboard-content">
 
                     <div class="create-menu-btn">
-                        <button onclick="window.location.href='#application.baseURL#?page=create-menu'">Add New Menu</button>
+                        <button onclick="window.location.href='#variables.app.baseURL#?page=create-menu'">Add New Menu</button>
                     </div>
 
 <!---                     <div class="search-bar"> 
@@ -39,7 +39,7 @@
                                     <td>#variables.menuItems.items.description#</td>
                                     <td>$#variables.menuItems.items.price#</td>
                                     <td>
-                                        <button class="edit-btn" title="Edit" onclick="window.location.href='#application.baseURL#?page=create-menu&id=#variables.menuItems.items.id#'">
+                                        <button class="edit-btn" title="Edit" onclick="window.location.href='#variables.app.baseURL#?page=create-menu&id=#variables.menuItems.items.id#'">
                                             <i class="fas fa-edit"></i>
                                         </button>
                                         <button class="delete-btn" title="Delete" onclick="deleteMenuItem(#variables.menuItems.items.id#)">
@@ -53,7 +53,7 @@
 
                     <div class="pagination">
                         <cfif currentPage GT 1>
-                            <a href="#application.baseURL#?page=admin-menu&currentPage=#currentPage-1#" >Previous</a>
+                            <a href="#variables.app.baseURL#?page=admin-menu&currentPage=#currentPage-1#" >Previous</a>
                         <cfelse>
                             <a href="javascript:void(0);" style="pointer-events: none; color: gray;">Previous</a>
                         </cfif>
@@ -61,13 +61,13 @@
                         <cfoutput>
                             <!-- Display page numbers -->
                             <cfloop from="1" to="#variables.totalPages#" index="pageNum">
-                                <a href="#application.baseURL#?page=admin-menu&currentPage=#pageNum#" 
+                                <a href="#variables.app.baseURL#?page=admin-menu&currentPage=#pageNum#" 
                                 <cfif pageNum EQ currentPage>class="active"</cfif>>#pageNum#</a>
                             </cfloop>
                         </cfoutput>
 
                         <cfif currentPage LT variables.totalPages>
-                            <a href="#application.baseURL#?page=admin-menu&currentPage=#currentPage+1#">Next</a>
+                            <a href="#variables.app.baseURL#?page=admin-menu&currentPage=#currentPage+1#">Next</a>
                         <cfelse>
                             <a href="javascript:void(0);" style="pointer-events: none; color: gray;">Next</a>
                         </cfif>

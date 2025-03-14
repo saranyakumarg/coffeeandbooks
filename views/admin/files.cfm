@@ -1,6 +1,6 @@
 <!--- <cfif NOT structKeyExists(session, "loggedInUser") OR session.loggedIn EQ false OR session.userRole NEQ "admin"> --->
 <cfif NOT structKeyExists(session, "loggedInUser")>
-    <cflocation url="#application.baseURL#index.cfm">
+    <cflocation url="#variables.app.baseURL#index.cfm">
 </cfif>
 
 <!DOCTYPE html>
@@ -17,7 +17,7 @@
                 <div class="dashboard-content">
                     <h2>File Management</h2>
                     <!---    File management                  --->
-                    <cfset variable.uploadDirectory = #application.baseUrl#&'uploads/filesDirectory'>
+                    <cfset variable.uploadDirectory = #variables.app.baseURL#&'uploads/filesDirectory'>
                     <cfset filename = variable.uploadDirectory&'/write_file.txt'>
                     <cfif not directoryExists(variable.uploadDirectory)>
                         <cfdirectory action="create" directory="#variable.uploadDirectory#">
@@ -40,9 +40,10 @@
                         </cffile>
                         <cfset content = FileRead(filename)> <!--- OR <cffile action="Read" file="#filename#" variable="content"> --->
                         <cfoutput>#content#</cfoutput>
-                        <cfoutput>File Length = #Len(content)# <br></cfoutput>
+                        <cfoutput>File Length = #Len(contfent)# <br></cfoutput>
                         <cfcatch type="any">
                             <cfoutput>#cfcatch.message#<br>#cfcatch.detail#<br></cfoutput>
+                            <cflog file="error_log" type="Error" application="yes" text="An error occurred: #cfcatch.message#">
                         </cfcatch>
                     </cftry>
                     <!--- read directory --->

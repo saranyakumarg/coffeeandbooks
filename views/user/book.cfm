@@ -1,6 +1,6 @@
 
 
-<cfinclude  template="../../controller/admin/booksAction.cfm">
+<cfinclude  template="../../controller/user/booksAction.cfm">
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,11 +13,6 @@
                 <cfinclude  template="../layout/sidenav.cfm">
                 <div class="dashboard-content">
 
-                    <div class="create-menu-btn">
-                        <button onclick="window.location.href='#variables.app.baseURL#?page=books-log'">User logs</button>
-                        <button onclick="window.location.href='#variables.app.baseURL#?page=create-book'">Add New Book</button>
-                    </div>
-
 <!---                     <div class="search-bar"> 
                         <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Search for menu items...">
                     </div> --->
@@ -25,28 +20,46 @@
                     <table class="menu-items-table">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>Code</th>
                                 <th>Name</th>
-                                <th>Description</th>
                                 <th>Author</th>
-                                <th>Action</th>
+                                <th>Status</th>
+                                <th>Booked at</th>
+                                <th>Borrowed at</th>
+                                <th>Review</th>
+                                <th>Reviewed at</th>
+                                <th>Returned at</th>
                             </tr>
                         </thead>
                         <tbody>
                             <cfoutput query="#variables.books.items#">
                                 <tr>
-                                    <td>#variables.books.items.id#</td>
-                                    <td>#variables.books.items.name#</td>
-                                    <td>#variables.books.items.description#</td>
+                                    <td>BK-#variables.books.items.user_book_id#</td>
+                                    <td>#variables.books.items.book_name#</td>
                                     <td>#variables.books.items.authorName#</td>
                                     <td>
-                                        <button class="edit-btn" title="Edit" onclick="window.location.href='#variables.app.baseURL#?page=create-book&id=#variables.books.items.id#'">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="delete-btn" title="Delete" onclick="deleteBook(#variables.books.items.id#)">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
+                                        <cfif variables.books.items.book_returned_date NEQ "">
+                                            Returned
+                                        <cfelseif variables.books.items.borrowed_date NEQ "">
+                                            Borrowed
+                                        <cfelseif variables.books.items.booked_date NEQ "">
+                                            Booked
+                                        </cfif>
                                     </td>
+                                    <td>#DateFormat(variables.books.items.booked_date, 'mmm dd, yyyy') & " " & TimeFormat(variables.books.items.booked_date, 'hh:mm tt')#</td>  
+                                    <td>#DateFormat(variables.books.items.borrowed_date, 'mmm dd, yyyy') & " " & TimeFormat(variables.books.items.borrowed_date, 'hh:mm tt')#</td>  
+                                    <td>
+                                        <cfif variables.books.items.review NEQ "">
+                                            <i class="fa fa-sticky-note" aria-hidden="true"></i>
+                                            #variables.books.items.review#
+                                        <cfelse>
+                                            <button class="edit-btn" <cfif variables.books.items.borrowed_date NEQ ""> title="Add Review"<cfelse> title="Add Review after reading the book" disabled</cfif> onclick="">
+                                                <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                                            </button>
+                                        </cfif>
+                                    </td>  
+                                    <td>#DateFormat(variables.books.items.review_date, 'mmm dd, yyyy') & " " & TimeFormat(variables.books.items.review_date, 'hh:mm tt')#</td>  
+                                    <td>#DateFormat(variables.books.items.book_returned_date, 'mmm dd, yyyy') & " " & TimeFormat(variables.books.items.book_returned_date, 'hh:mm tt')#</td>  
                                 </tr>
                             </cfoutput>
                         </tbody>

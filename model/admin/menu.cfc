@@ -1,5 +1,6 @@
 
 <cfcomponent displayname="MenuComponent">
+    <cfset variables.app = getApplicationSettings()>
     <!--- get menu list --->
     <cffunction name="getAllMenuItems" access="public" returntype="struct">
         <cfargument name="id" type="numeric" required="false">
@@ -12,13 +13,13 @@
 
         <cfset var offset = (arguments.page - 1) * arguments.pageSize>
         <cfset var totalCount = 0>
-        <cfquery name="qryTotalCount" datasource="#application.dsn#">
+        <cfquery name="qryTotalCount" datasource="#variables.app.datasource#">
             SELECT COUNT(*) as total_count
             FROM menu_items
         </cfquery>
         <cfset totalCount = qryTotalCount.total_count>
         <cfset variable.result.totalCount = totalCount>
-        <cfquery name="qryGetAllMenuItems" datasource="#application.dsn#">
+        <cfquery name="qryGetAllMenuItems" datasource="#variables.app.datasource#">
             SELECT id, name, description, price, image_file_path
             FROM menu_items
             <cfif arguments.id GT 0>
@@ -45,7 +46,7 @@
         <cfset arguments.description = ReReplace(Trim(arguments.description), '\s+', ' ', 'ALL')>
 
         <cfif structKeyExists(arguments, "id") AND arguments.id GT 0>
-            <cfquery datasource="#application.dsn#">
+            <cfquery datasource="#variables.app.datasource#">
                 UPDATE menu_items
                 SET 
                     name = <cfqueryparam value="#arguments.name#" cfsqltype="cf_sql_varchar">,
@@ -58,7 +59,7 @@
             <cfset success = true>
 
         <cfelse>
-            <cfquery datasource="#application.dsn#">
+            <cfquery datasource="#variables.app.datasource#">
                 INSERT INTO menu_items (name, description, price <cfif len(arguments.imagePath)>, image_file_path</cfif>)
                 VALUES (
                     <cfqueryparam value="#arguments.name#" cfsqltype="cf_sql_varchar">,
@@ -68,7 +69,7 @@
                 )
             </cfquery>
 
-            <cfquery name="queryNewID" datasource="#application.dsn#">
+            <cfquery name="queryNewID" datasource="#variables.app.datasource#">
                 SELECT LAST_INSERT_ID() AS newID
             </cfquery>
 
@@ -87,7 +88,7 @@
         <cfset var success = false>
 
         <!--- Perform the delete operation --->
-        <cfquery name="qryDeleteItem" datasource="#application.dsn#">
+        <cfquery name="qryDeleteItem" datasource="#variables.app.datasource#">
             DELETE FROM menu_items
             WHERE id = <cfqueryparam value="#arguments.itemId#" cfsqltype="cf_sql_integer">
         </cfquery>

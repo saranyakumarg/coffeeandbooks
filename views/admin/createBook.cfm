@@ -13,7 +13,7 @@
                     <h3>Add New Book</h3>
                     #variable.message#
                     <cfif len(variable.singleBook) && len(variable.singleBook.items.image_file_path)>
-                        <img src="#application.baseUrl&variable.singleBook.items.image_file_path#" class="small-image">
+                        <img src="#variables.app.baseURL&variable.singleBook.items.image_file_path#" class="small-image">
                     </cfif>
 
                     <cfform action="" method="POST" id="createBookForm" name="createBookForm" format="html" class="create-menu-form" enctype = "multipart/form-data">

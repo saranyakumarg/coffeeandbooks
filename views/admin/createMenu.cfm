@@ -13,7 +13,7 @@
                     <h3>Create New Menu Item</h3>
                     #variable.message#
                     <cfif len(variable.singleMenuItem) && len(variable.singleMenuItem.items.image_file_path)>
-                        <img src="#application.baseUrl&variable.singleMenuItem.items.image_file_path#" class="small-image">
+                        <img src="#variables.app.baseURL&variable.singleMenuItem.items.image_file_path#" class="small-image">
                     </cfif>
 
                     <cfform action="" method="POST" id="createMenuForm" name="createMenuForm" format="html" class="create-menu-form" enctype = "multipart/form-data">

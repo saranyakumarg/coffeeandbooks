@@ -1,6 +1,6 @@
 <!--- <cfif NOT structKeyExists(session, "loggedInUser") OR session.loggedIn EQ false OR session.userRole NEQ "admin"> --->
 <cfif NOT structKeyExists(session, "loggedInUser")>
-    <cflocation url="#application.baseURL#index.cfm">
+    <cflocation url="#variables.app.baseURL#index.cfm">
 </cfif>
 
 <!DOCTYPE html>

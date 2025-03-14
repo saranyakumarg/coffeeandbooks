@@ -1,13 +1,14 @@
-<cfif structKeyExists( URL, "action") AND URL.action == 'delete'> 
+<cfset variables.app = getApplicationSettings()>
+<cfif structKeyExists( URL, "action") AND (URL.action == 'delete' OR URL.action == 'confirm-borrow')> 
     <cfsetting enablecfoutputonly="true">
     <cfsetting showDebugOutput="false">
 </cfif>
 <cfscript>
     if(!structKeyExists(session, "loggedInUser")) {
-        location(url = "#application.baseURL#index.cfm");
+        location(url = "#variables.app.baseURL#index.cfm");
     }
 
-    variables.book = createObject("component", application.baseURL & "model.admin.book");
+    variables.book = createObject("component", variables.app.baseURL & "model.admin.book");
 
     /* Create Book */
     if (structKeyExists(URL, "page") && URL.page == "create-book") {
@@ -40,7 +41,7 @@
             result = book.createBook(variable.itemID, form.name, form.description, form.author, variable.imagePath);
             if (result) {
                 variable.message = '<span class="success-message">Book added/updated successfully!</span>';
-                redirectURL = application.baseURL & "?page=admin-books";
+                redirectURL = variables.app.baseURL & "?page=admin-books";
                 location(url = redirectURL);
             } else {
                 variable.message = '<span class="failure-message">There was an error creating/updating the menu item. Please try again.</span>';
@@ -60,6 +61,21 @@
         response.message = "Book deleted successfully.";
         writeOutput(serializeJSON(response));
     }
+
+    /* confirm borrow */ 
+    if (structKeyExists(URL, "action") && URL.action == "confirm-borrow") {
+        userBookId = form.id;
+        variables.borrowBook = variables.book.confirmBorrow(userBookId = userBookId);
+        response = structNew();
+        if(variables.borrowBook) {
+            response.success = true;
+            response.message = "Borrow confirmed successfully.";
+        } else {
+            response.success = false;
+            response.message = "Error occured, please try again after some time.";
+        }
+        writeOutput(serializeJSON(response));
+    }
     
     /* Books list */
     variables.currentPage = 1;
@@ -70,5 +86,17 @@
     variables.books = variables.book.getAllBooks(page = variables.currentPage, pageSize = variables.pageSize);
     variables.totalPages = ceiling(variables.books.totalcount / variables.pageSize);
     // writeDump(var=variables.books.items, abort=true);
+
+    /* Books log */
+    if (structKeyExists(URL, "page") && URL.page == "books-log") {
+        variables.currentPage = 1;
+        variables.bookLog = createObject("component", variables.app.baseURL & "model.book");
+        if (structKeyExists(URL, "currentpage")) {
+            variables.currentPage = URL.currentpage;
+        }
+        variables.pageSize = 5;
+        variables.booksLog = variables.bookLog.getUserBooks(page = variables.currentPage, pageSize = variables.pageSize);
+        variables.totalPages = ceiling(variables.booksLog.totalcount / variables.pageSize);
+     }
 
 </cfscript>

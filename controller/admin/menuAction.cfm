@@ -1,11 +1,12 @@
+<cfset variables.app = getApplicationSettings()>
 <cfif NOT structKeyExists(session, "loggedInUser")>
-    <cflocation url="#application.baseURL#index.cfm">
+    <cflocation url="#variables.app.baseURL#index.cfm">
 </cfif>
 
 <cfif structKeyExists(URL, "page") AND URL.page == 'create-menu' >
 
     <!--- Menu create and edit  --->
-    <cfset menu = createObject("component", "#application.baseURL#model.admin.menu")>
+    <cfset menu = createObject("component", "#variables.app.baseURL#model.admin.menu")>
     <cfset variable.singleMenuItem = []>
     <cfset variable.message = "">
     <cfset variable.itemID = 0>
@@ -38,7 +39,7 @@
         
         <cfif result>
             <cfset variable.message = '<span class = "success-message">Menu item created/updated successfully!</span>' >
-            <cfset redirectURL = "#application.baseURL#?page=admin-menu">
+            <cfset redirectURL = "#variables.app.baseURL#?page=admin-menu">
             <cflocation url="#redirectURL#">
         <cfelse>
             <cfset variable.message = '<span class = "failure-message">There was an error creating/updating the menu item. Please try again.</span>' >
@@ -51,7 +52,7 @@
 
     <cfif structKeyExists( URL, "action") AND URL.action == 'delete'>   
         <cfset menuItemId = form.id>
-            <cfset variables.menu = createObject("component", "#application.baseURL#model.admin.menu")>
+            <cfset variables.menu = createObject("component", "#variables.app.baseURL#model.admin.menu")>
             <cfset variables.menuItem = variables.menu.deleteMenuItem(itemId=menuItemId)>
             <cfoutput>success</cfoutput>
     </cfif>
@@ -61,7 +62,7 @@
         <cfset variables.currentPage = url.currentpage>
     </cfif>
     <cfset variables.pageSize = 5>
-    <cfset variables.menu = createObject("component", "#application.baseURL#model.admin.menu")>
+    <cfset variables.menu = createObject("component", "#variables.app.baseURL#model.admin.menu")>
     <cfset variables.menuItems = variables.menu.getAllMenuItems(page=variables.currentPage, pageSize=variables.pageSize)>
     <cfset variables.totalPages = ceiling(variables.menuItems.totalcount / variables.pageSize)>
 </cfif>

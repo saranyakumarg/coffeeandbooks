@@ -1,5 +1,5 @@
 <cftry>
-    <cfquery name="createUserTable" datasource="#application.dsn#">
+    <cfquery name="createUserTable" datasource="#variables.app.datasource#">
         CREATE TABLE users (
             id INT AUTO_INCREMENT PRIMARY KEY,
             username VARCHAR(255) NOT NULL,

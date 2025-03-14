@@ -268,6 +268,70 @@ section + section {
     line-height: 1.5;
 }
 
+.book-item-shelf {
+    color: #6f4f1f;
+    margin-left: auto; /* Aligns it to the right */
+    padding-inline-end: 30px;
+}
+
+.book-item-get {
+    padding: 12px 24px;                    /* Slightly larger padding for better size */
+    font-size: 16px;                        /* Ensure readability */
+    color: #fff;                           /* White text for contrast */
+    background-color: #a35829;             /* Pastel brown background */
+    border: none;                          /* Remove default border */
+    border-radius: 8px;                    /* Rounded corners for a modern look */
+    cursor: pointer;                       /* Pointer cursor to indicate interactivity */
+    font-weight: 600;                       /* Slightly bolder text */
+    text-transform: uppercase;             /* Uppercase text for emphasis */
+    letter-spacing: 1px;                    /* Adds slight spacing between letters */
+    display: inline-flex;                   /* Aligns text and SVG horizontally */
+    align-items: center;                    /* Vertically centers content */
+    gap: 8px;                               /* Adds space between the text and icon */
+    transition: all 0.3s ease;              /* Smooth transition for effects */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Soft shadow for depth */
+    outline: none;                         /* Removes outline on focus */
+}
+
+.book-item-get svg {
+    width: 20px;                           /* Size of the icon */
+    height: 20px;                          /* Ensure it fits well */
+    fill: #fff;                            /* White icon to match the text */
+    transition: transform 0.3s ease;       /* Smooth transition for icon movement */
+}
+
+.book-item-get .hover-icon {
+    display: none;                         /* Initially hide the hover icon */
+}
+
+.book-item-get:hover .default-icon {
+    display: none;                         /* Hide the default icon on hover */
+}
+
+.book-item-get:hover .hover-icon {
+    display: inline-block;                 /* Show hover icon on hover */
+}
+
+.book-item-get:hover {
+    background-color: #471c02;             /* Lighter pastel brown on hover */
+    transform: translateY(-4px);           /* Lift button on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);  /* Enhance shadow for emphasis */
+}
+
+.book-item-get:hover svg {
+    transform: rotate(360deg);             /* Add a rotate effect to the icon on hover */
+}
+
+.book-item-get:active {
+    background-color: #a35829;             /* Reset to original pastel brown on click */
+    transform: translateY(2px);            /* Simulate pressing down effect */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);  /* Light shadow when pressed */
+}
+
+.book-item-get:active svg {
+    transform: scale(0.9);                 /* Scale down the icon when clicked */
+}
+
 /* Modal styles */
 .modal {
     display: none; /* Hidden by default */
@@ -346,6 +410,43 @@ section + section {
     color: #000; /* Darker color for hover effect */
     text-decoration: none;
 }
+
+/* Heading styles */
+#popup-heading {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Paragraph text styling */
+  #popup-content {
+    font-family: 'Arial', sans-serif;
+    color: #555;
+    font-size: 16px;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  /* Confirm Button styling */
+.confirm-btn {
+    background-color: #a35829;
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 150px; /* Button width */
+    margin: 0 auto;
+    display: block;
+    transition: background-color 0.3s ease;
+  }
+  
+  .confirm-btn:hover {
+    background-color: #a8470b;
+  }
 
 /* Success message styling */
 .success-message {
@@ -610,6 +711,86 @@ section + section {
     border-color: #ffffff; /* Change border color on hover */
 }
 
+.hover-title-btn {
+    position: relative;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hover-title-btn .button-text {
+    display: inline-block;
+    transition: opacity 0.3s ease;
+}
+
+.hover-title-btn .fa-check-square {
+    font-size: 20px; /* Adjust icon size */
+    transition: opacity 0.3s ease;
+}
+
+.hover-title-btn:hover .fa-check-square {
+    opacity: 0; /* Hide icon on hover */
+}
+
+.hover-title-btn:hover .button-text {
+    opacity: 1; /* Show text on hover */
+}
+
+/* Initially, hide the text */
+.hover-title-btn .button-text {
+    opacity: 0;
+}
+
+
+
+/* User css*/
+
+.dashboard-box {
+    background-color: #f8fafc;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.dashboard-box .count {
+    font-size: 32px;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.dashboard-box .label {
+    font-size: 18px;
+    color: #555;
+}
+
+.action-button {
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.dashboard-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+  
+  }
 
 /* Media Queries for Small Screens */
 @media (max-width: 768px) {

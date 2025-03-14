@@ -1,5 +1,6 @@
     // Access the data attribute from the HTML element
     var baseURL = document.getElementById("appConfig").getAttribute("data-baseurl");    
+    var role = document.getElementById("appConfig").getAttribute("data-role");    
     var modal = document.getElementById("adminLoginModal");
     var btn = document.getElementById("adminLoginBtn");
     var span = document.getElementsByClassName("close")[0];
@@ -36,7 +37,13 @@
             if(xhr.status == 200) {
                 span.innerHTML = "login successful";
                 span.classList.add("success-message");
-                window.location.href = baseURL + "?page=dashboard"; 
+                var response = JSON.parse(xhr.responseText.trim());
+                console.log(response.ROLE);
+                if(response.ROLE == 1) {
+                    window.location.href = baseURL + "?page=dashboard"; 
+                } else if(response.ROLE == 2) {
+                    window.location.href = baseURL + "?page=user-dashboard"; 
+                }
             } else {
                 span.classList.add("failure-message");
                 span.innerHTML = "Invaild credentials";

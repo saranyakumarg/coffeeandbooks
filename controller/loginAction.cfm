@@ -1,6 +1,9 @@
+<cfset variables.app = getApplicationSettings()>
 <cfif structKeyExists(form, "username") and structKeyExists(form, "password")>
-    <cfquery name="getUser" datasource="#application.dsn#">
-        SELECT username, password, role
+    <cfsetting enablecfoutputonly="true" />
+    <cfsetting showDebugOutput="false">
+    <cfquery name="getUser" datasource="#variables.app.datasource#">
+        SELECT id, username, password, role
         FROM users
         WHERE username = <cfqueryparam value="#form.username#" cfsqltype="cf_sql_varchar">
     </cfquery>
@@ -10,8 +13,13 @@
 <!---        <cflogin> 
                 <cfloginuser  name="#getUser.username#"  password="#getUser.password#"  roles="#getUser.role#">
             </cflogin>  --->
-            <cfset session.loggedInUser = {'username' = getUser.username, 'role' = getUser.role }>
+            <cfset session.loggedInUser = {'userId' = getUser.id,'username' = getUser.username, 'role' = getUser.role }>
             <cfheader statuscode="200" statustext="OK">
+            <cfset response = structNew()>
+            <cfset response.success = true>
+            <cfset response.role = session.loggedInUser.role>
+            <cfset jsonResponse = serializeJSON(response)>
+            <cfoutput>#jsonResponse#</cfoutput>
         <cfelse>
             <cfheader statuscode="401" statustext="Unauthorized">
         </cfif>

@@ -1,9 +1,8 @@
-<cfset menu = createObject("component", "#application.baseURL#model.menu")>
-<cfset menuItems = menu.getAllMenuItems()>
-
 <!DOCTYPE html>
 <html lang="en">
 <cfinclude  template="layout/header.cfm">
+<cfset menu = createObject("component", "#variables.app.baseURL#model.menu")>
+<cfset menuItems = menu.getAllMenuItems()>
 <body>
     <cfinclude  template="layout/nav.cfm">
     <cfoutput>
@@ -15,7 +14,7 @@
                         <div class="item-header">
                             <cfoutput><strong class="item-name">#menuItems.name#</strong></cfoutput>
                             <cfif len(menuItems) && len(menuItems.image_file_path)>
-                                <img src="#application.baseUrl&menuItems.image_file_path#" class="small-image-home">
+                                <img src="#variables.app.baseURL&menuItems.image_file_path#" class="small-image-home">
                             </cfif>
                             <span class="item-price">$ #menuItems.price#</span>
                         </div>
