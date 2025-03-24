@@ -68,6 +68,14 @@
         variables.borrowBook = variables.book.confirmBorrow(userBookId = userBookId);
         response = structNew();
         if(variables.borrowBook) {
+             // email data
+                variables.emailData = {
+                    to: "saranyakumar@yopmail.com",
+                    from: "saranyakumar.g@techversantinfotech.com",
+                    subject: "Borrow Confirmation",
+                    message: "Hello, <br> Your book borrowing request has been successfully confirmed.<br>Thank you!",
+                    type: "html"
+                };
             response.success = true;
             response.message = "Borrow confirmed successfully.";
         } else {
@@ -100,3 +108,13 @@
      }
 
 </cfscript>
+
+<!--- Send email using cfmail outside cfscript --->
+<cfif structKeyExists(variables, "borrowBook") AND variables.borrowBook>
+    <cfmail to="#variables.emailData.to#"
+            from="#variables.emailData.from#"
+            subject="#variables.emailData.subject#"
+            type="html">
+        #variables.emailData.message#
+    </cfmail>
+</cfif>

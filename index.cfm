@@ -5,9 +5,9 @@
 </cfif>
 
 <cfset variable.role = 0>
-<cfset adminPages = ["dashboard", "admin-menu", "create-menu", "admin-books", "create-book", "files", "books-log"]>
+<cfset adminPages = ["dashboard", "admin-menu", "create-menu", "admin-books", "create-book", "files", "books-log", "admin-events"]>
 <cfset userPages = ["user-dashboard","user-books"]>
-<cfset homePages = ["home", "menu", "books"]>
+<cfset homePages = ["home", "menu", "books", "events"]>
 
 <cfif structKeyExists(session, "loggedInUser")>
     <cfset variable.role = session.loggedInUser.role>
@@ -21,7 +21,11 @@
         <cfset route = "home">
     </cfif>
 <cfelse>        
-    <cfset route = "home">
+    <cfif ArrayContains(homePages, route)>
+        <cfset route = route>
+    <cfelse>        
+        <cfset route = "home">
+    </cfif>
 </cfif>
 
 <cfswitch expression="#route#"> 
@@ -34,6 +38,10 @@
     <cfcase value="books">
         <cfinclude template="views/book.cfm">
     </cfcase>
+    <cfcase value="events">
+        <cfinclude template="controller/admin/eventsAction.cfm">
+        <cfinclude template="views/event.cfm">
+    </cfcase>
     <cfcase value="dashboard">
         <cfinclude template="views/admin/dashboard.cfm">
     </cfcase>
@@ -45,6 +53,10 @@
     </cfcase>
     <cfcase value="admin-books">
         <cfinclude template="views/admin/book.cfm">
+    </cfcase>
+    <cfcase value="admin-events">
+<!---         <cfinclude template="views/admin/event.cfm"> --->
+        <cfinclude template="views/admin/eventDT.cfm">
     </cfcase>
     <cfcase value="create-book">
         <cfinclude template="views/admin/createBook.cfm">

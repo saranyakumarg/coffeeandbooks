@@ -6,7 +6,7 @@
     <div id="appConfig" data-baseurl="#variables.app.baseURL#" <cfif structKeyExists(session, "loggedInUser")> data-role="#session.loggedInUser.role#" </cfif> ></div>
     <nav>
         <a href="#variables.app.baseURL#?page=home">Home</a>
-        <a href="#variables.app.baseURL#?page=about">About</a>
+        <a href="#variables.app.baseURL#?page=events">Events</a>
         <a href="#variables.app.baseURL#?page=menu">Menu</a>
         <a href="#variables.app.baseURL#?page=books">Books</a>
         <cfif structKeyExists(session, "loggedInUser")>

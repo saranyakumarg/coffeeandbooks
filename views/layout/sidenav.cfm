@@ -4,6 +4,7 @@
             <a href="#variables.app.baseURL#?page=dashboard">Dashboard</a>
             <a href="#variables.app.baseURL#?page=admin-menu">Manage Menu</a>
             <a href="#variables.app.baseURL#?page=admin-books">Manage Books</a>
+            <a href="#variables.app.baseURL#?page=admin-events">Manage Events</a>
             <a href="#variables.app.baseURL#?page=files">Manage Files</a>
             <a href="admin-settings.cfm">Settings</a>  
         <cfelseif structKeyExists(session, "loggedInUser") AND session.loggedInUser.role == 2>

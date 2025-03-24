@@ -87,7 +87,6 @@
         
         <cfset var success = false>
 
-        <!--- Perform the delete operation --->
         <cfquery name="qryDeleteItem" datasource="#variables.app.datasource#">
             DELETE FROM menu_items
             WHERE id = <cfqueryparam value="#arguments.itemId#" cfsqltype="cf_sql_integer">

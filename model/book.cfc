@@ -12,7 +12,7 @@
     <cffunction name="confirmBook" access="public" returntype="boolean">
         <cfargument name="bookId" type="numeric" required="true">
         <cfargument name="userId" type="numeric" required="true">
-         <cfset var success = false>
+        <cfset var success = false>
         <cfquery datasource="#variables.app.datasource#">
                 INSERT INTO user_books (user_id, book_id, booked_date)
                 VALUES (
@@ -24,6 +24,14 @@
 
             <cfquery name="queryNewID" datasource="#variables.app.datasource#">
                 SELECT LAST_INSERT_ID() AS newID
+            </cfquery>
+            <cfquery name="qryupdatesq" datasource="#variables.app.datasource#" result="qryResult">
+                UPDATE books
+                SET shelf_quantity = CASE 
+                                        WHEN shelf_quantity > 0 THEN shelf_quantity - 1 
+                                        ELSE 0 
+                                    END
+                WHERE id = <cfqueryparam value="#arguments.bookId#" cfsqltype="cf_sql_integer">
             </cfquery>
 
             <cfif queryNewID.recordCount GT 0 AND queryNewID.newID GT 0>
@@ -45,7 +53,7 @@
         <cfset var variable.page = IIf(arguments.page, arguments.page, 1)>
         <cfset var offset = (arguments.page - 1) * arguments.pageSize>
         <cfset var totalCount = 0>
-        <!--- Get total count of books for the user --->
+
         <cfquery name="qryTotalCount" datasource="#variables.app.datasource#">
             SELECT COUNT(*) AS total_count
             FROM user_books
@@ -55,7 +63,7 @@
         </cfquery>
         <cfset totalCount = qryTotalCount.total_count>
         <cfset variable.result.totalCount = totalCount>
-        <!--- Fetch paginated user books --->
+
         <cfquery name="qryGetUserBooks" datasource="#variables.app.datasource#">
             SELECT 
                 ub.id AS user_book_id,

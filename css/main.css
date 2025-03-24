@@ -332,6 +332,110 @@ section + section {
     transform: scale(0.9);                 /* Scale down the icon when clicked */
 }
 
+/* Events Section */
+.events-section {
+    padding: 50px 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #6f4f1f;
+    margin-bottom: 20px;
+}
+
+/* Event List */
+.event-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Event Item */
+.event-item {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: left;
+}
+
+.event-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Event Image */
+.event-image-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.event-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.event-item:hover .event-image {
+    transform: scale(1.1);
+}
+
+/* Event Content */
+.event-content {
+    padding: 20px;
+}
+
+.event-title {
+    font-size: 1.6em;
+    color: #6f4f1f;
+    margin-bottom: 10px;
+}
+
+.event-description {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.event-time {
+    font-size: 1em;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.event-time i {
+    color: #6f4f1f;
+    margin-right: 5px;
+}
+
+/* Event Button */
+.event-button {
+    display: inline-block;
+    background-color: #6f4f1f;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.event-button:hover {
+    background-color: #4f3003;
+}
+/* Events Section END */
+
+
 /* Modal styles */
 .modal {
     display: none; /* Hidden by default */
@@ -572,11 +676,7 @@ section + section {
 }
 
 .search-bar {
-    margin-bottom: 20px;
-    text-align: right;
-}
-
-.search-bar input {
+    text-align: left;
     padding: 10px;
     font-size: 16px;
     width: 200px;
@@ -840,6 +940,10 @@ section + section {
     .modal-content button {
         font-size: 1em;
     }
+    .event-list {
+        grid-template-columns: 1fr;
+    }
+    /* Responsive Design */
 }
 /* Media query for larger screen sizes */
 @media (min-width: 768px) {

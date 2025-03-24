@@ -61,6 +61,17 @@ CREATE TABLE user_books (
     FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
 );
 
+CREATE TABLE events (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    start_time DATETIME NOT NULL,
+    end_time DATETIME,
+    description TEXT,
+    photo VARCHAR(500), 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
 
 
 

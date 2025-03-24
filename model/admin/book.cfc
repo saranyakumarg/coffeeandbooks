@@ -86,8 +86,6 @@
         <cfargument name="bookId" type="numeric" required="true">
         
         <cfset var success = false>
-
-        <!--- Perform the delete operation --->
         <cfquery name="qryDeleteItem" datasource="#variables.app.datasource#">
             DELETE FROM books
             WHERE id = <cfqueryparam value="#arguments.bookId#" cfsqltype="cf_sql_integer">
