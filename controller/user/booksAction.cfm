@@ -31,7 +31,7 @@
             variables.currentPage = URL.currentpage;
         }
         variables.pageSize = 5;
-        variables.books = variables.book.getUserBooks(page = variables.currentPage, pageSize = variables.pageSize);
+        variables.books = variables.book.getUserBooks(page = variables.currentPage, pageSize = variables.pageSize, userId = session.loggedInUser.userId);
         variables.totalPages = ceiling(variables.books.totalcount / variables.pageSize);
     }
 </cfscript>

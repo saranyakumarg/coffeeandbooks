@@ -8,6 +8,7 @@ component{
     this.pageTitle = "Welcome to Coffee & Books";
     this.sessionTimeout = createTimespan(0, 0, 10, 0);
     this.baseUrl = "/projects/coffeeandbooks/";
+    this.secretKey = "4HTRV7RE43GB";
     this.showDebugOutput = "yes";
     this.ormEnabled = true; // Enable ORM
 
@@ -25,6 +26,7 @@ component{
         
         this.sessionTimeout = createTimespan(0, 0, 10, 0);
         this.baseUrl = "/projects/coffeeandbooks/";
+        this.secretKey = "4HTRV7RE43GB";
     }
     function onRequestStart(targetPage){
         return true;
